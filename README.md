@@ -13,7 +13,7 @@ export OPENAI_API_KEY_SK =YOUR_SECRET_API_KEY
 ```
 ### Then you can run the fastapi endpoint as:
 ```
-uvicorn personalized_memory_based_QA:QA_app --reload
+uvicorn personalized_document_based_QA_API:QA_app --reload
 ```
 * Here the reload flag will help you to rfresh new contents as you go on updating your code.
 ### It will redirect you to index.html page
