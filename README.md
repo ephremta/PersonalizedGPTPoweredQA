@@ -19,4 +19,4 @@ uvicorn personalized_memory_based_QA:QA_app --reload
 ### It will redirect you to index.html page
 You can provide your document and ask any questions that you want to catch up from your documents!
 
-![Alt Text](path/to/your/image.png)
+![Alt Text](static/ui_demo.png)
