@@ -1,5 +1,5 @@
 ## Personalized Document Based QA
-This repo enables you to simplify your tasks to get relevant and precise ifnormation from your documents. You can upload your documents or provide the directories where your list of documents found.
+This simple app enables you to simplify your tasks to get relevant and precise ifnormation from your documents. You can upload your documents or provide the directories where your list of documents found.
 ### How to setup dev environments
 you can run the " install_env.sh " file as: 
 ```
