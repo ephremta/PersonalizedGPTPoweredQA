@@ -32,8 +32,8 @@ logging.basicConfig(level=logging.INFO, format=log_format)
 logger = logging.getLogger(__name__)
 templates = Jinja2Templates(directory="templates")
 QA_app = FastAPI(
-    title="Ubongo personalized Document based QA Bot",
-    description="This simple API utilizes openapi gpt 3.5 turbo. The aim of the API is to enable Ubongo to ask questions to get precise information from any document they have on hand. Our motivation is the complexity of the consolidated financial report information exdtraction process.",
+    title="personalized memory based QA",
+    description="This simple API utilizes openapi gpt 3.5 turbo. The aim of the API is to enable to ask questions to get precise information from any document they have on hand. Our motivation is the complexity of getting precise information from our folders or documents .",
     version="1.0.0",
 )
 templates = Jinja2Templates(directory="static")
@@ -45,7 +45,7 @@ QA_app.mount(
 async def read_root(request: Request):
     context = {
         "request": request,
-        "image_url_1": "/static/ubongo.png",
+        "image_url_1": "/static/QA.png",
     }
     return templates.TemplateResponse("index.html", context)
 
