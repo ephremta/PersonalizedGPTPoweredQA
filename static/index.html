@@ -1,0 +1,145 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Personalized Document-based QA</title>
+    <!-- Add Bootstrap CSS -->
+    <link
+      rel="stylesheet"
+      href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    />
+
+    <!-- Custom CSS for logo and container -->
+    <style>
+      .custom-logo {
+        height: 80px; /* Fixed height */
+        width: auto; /* Allow width to scale proportionally */
+      }
+
+      .custom-container {
+        max-width: 1000px;
+        margin: auto;
+        padding: 30px; /* Increased padding */
+        background-color: #f9f9f9;
+        border-radius: 10px;
+        box-shadow: 0px 0px 10px 2px rgba(0, 0, 0, 0.1);
+      }
+
+      /* Custom CSS for mobile responsiveness */
+      @media (max-width: 767px) {
+        .custom-container {
+          padding: 15px; /* Reduced padding for smaller screens */
+        }
+        .custom-logo {
+          height: 60px; /* Reduce logo height for smaller screens */
+        }
+      }
+
+      /* Custom CSS for chat conversation */
+      .chat-container {
+        max-height: 300px;
+        overflow-y: auto;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        padding: 10px;
+      }
+
+      .chat-message {
+        margin-bottom: 10px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="container mt-5 custom-container" style="height: 800px">
+      <!-- Logo and Title -->
+      <div class="text-center">
+        <img class="custom-logo" src="{{image_url_1}}" alt="Ubongo" />
+        <h2 class="mt-3">GPT Powered Personalized Document-based QA Bot</h2>
+      </div>
+      <!-- Chat Conversation -->
+      <div class="chat-container mt-4" id="chatContainer">
+        <div class="chat-message bot-message">
+          Hello! How can I assist you today?
+        </div>
+      </div>
+      <!-- Question and Document Form -->
+      <form id="qaForm">
+        <div class="form-group mt-3">
+          <label for="question" style="font-weight: bold">Question:</label>
+          <input
+            type="text"
+            class="form-control"
+            id="question"
+            name="question"
+            placeholder="Enter your question"
+          />
+        </div>
+        <div class="form-group">
+          <label for="document" style="font-weight: bold">Document:</label>
+          <input
+            type="file"
+            class="form-control-file"
+            id="document"
+            name="file_data"
+          />
+        </div>
+        <button type="submit" class="btn btn-primary" style="font-weight: bold">
+          Submit
+        </button>
+      </form>
+      <!-- Answer Text Area -->
+      <div class="mt-4">
+        <label for="answer">Answer:</label>
+        <!-- Text area to display the answer -->
+        <textarea class="form-control" id="answer" rows="8" readonly></textarea>
+        <!-- Increased rows -->
+      </div>
+    </div>
+
+    <!-- Add Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+      // Function to add a new chat message to the conversation
+      function addChatMessage(message, sender) {
+        const chatContainer = document.getElementById("chatContainer");
+        const chatMessage = document.createElement("div");
+        chatMessage.classList.add("chat-message", sender + "-message");
+        chatMessage.textContent = message;
+        chatContainer.appendChild(chatMessage);
+        chatContainer.scrollTop = chatContainer.scrollHeight;
+      }
+
+      // Submit the form and display the answer
+      $(document).on("submit", "#qaForm", function (e) {
+        e.preventDefault();
+        let formData = new FormData(this);
+        $.ajax({
+          url: "/personalized_doc_based_QA/",
+          type: "POST",
+          data: formData,
+          processData: false,
+          contentType: false,
+          success: function (response) {
+            // Display user question
+            const userQuestion = $("#question").val();
+            addChatMessage(userQuestion, "user");
+
+            // Display the chatbot answer in the text area
+            const chatbotAnswer = response.answer;
+            addChatMessage(chatbotAnswer, "bot");
+
+            // Clear user input field
+            $("#question").val("");
+          },
+          error: function (error) {
+            console.log(error);
+            alert("Error occurred. Please try again.");
+          },
+        });
+      });
+    </script>
+  </body>
+</html>
+
+
+
