@@ -1,7 +1,7 @@
 
-from DataModel import QuestionAnswerRequest
-from Question_answering import question_answering
-from preprocessing import get_last_file_extension, test_embed, parse_document_contents, parse_text_from_docx, parse_text_from_pdf, text_to_docs
+from QAModel.DataModel import QuestionAnswerRequest
+from QAModel.Question_answering import question_answering
+from preprocessing.preprocessing import get_last_file_extension, test_embed, parse_document_contents, parse_text_from_docx, parse_text_from_pdf, text_to_docs
 from http.client import HTTPException
 from fastapi import FastAPI, File, UploadFile, Form, Request, Response
 from starlette.templating import Jinja2Templates
@@ -14,7 +14,8 @@ import uvicorn
 from pathlib import Path
 import os
 import sys
-
+from preprocessing import *
+from QAModel import *
 from dotenv import load_dotenv
 load_dotenv()
 
